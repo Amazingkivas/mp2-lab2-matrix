@@ -223,8 +223,6 @@ class TDynamicMatrix : private TDynamicVector<TDynamicVector<T>>
 public:
   TDynamicMatrix(size_t s = 1) : TDynamicVector<TDynamicVector<T>>(s)
   {
-      if (s <= 0)
-          throw out_of_range("Matrix size should be greater than zero");
       if (s > MAX_MATRIX_SIZE)
           throw out_of_range("Matrix size should be less than maximum size");
       for (size_t i = 0; i < sz; i++)

@@ -5,8 +5,39 @@
 // Тестирование матриц
 
 #include <iostream>
+#include <ctime>
 #include "tmatrix.h"
 //---------------------------------------------------------------------------
+void fill(TDynamicMatrix<double>& matrix, int matrix_size)
+{
+    int select_fill, i, j;
+    cout << "\nСпособ заполнения:\n" << endl;
+    cout << "1 - ручное заполнение" << endl;
+    cout << "2 - рандомное заполнение" << endl;
+    cout << "\nНомер: ";
+    cin >> select_fill;
+
+    if (select_fill == 1)  // Manual filling
+    {
+        cin >> matrix;
+    }
+    else if (select_fill == 2)  // Random filling
+    {
+        for (i = 0; i < matrix_size; i++)
+        {
+            for (j = 0; j < matrix_size; j++)
+            {
+                matrix[i][j] = rand() % 100;
+            }
+        }
+    }
+    else
+    {
+        cout << "ERROR: invalid number of filling method" << endl;
+        exit(1);
+    }
+}
+
 void main()
 {
     int  size, select;
@@ -17,6 +48,7 @@ void main()
         MULTIPLY_MATRIX_AND_VECTOR,
         MULTIPLY_MATRIX_AND_SCALAR
     };
+    srand(static_cast<unsigned>(time(0)));
 
     setlocale(LC_ALL, "Russian");
     cout << "Тестирование класс работы с матрицами" << endl;
@@ -41,7 +73,7 @@ void main()
 
     TDynamicMatrix<double> M1(size);
     cout << "\nЗаполнение первой матрицы: " << endl;
-    cin >> M1;
+    fill(M1, size);
     cout << "\nПервая матрица: " << endl << M1 << endl;
 
     switch (select)
@@ -50,7 +82,7 @@ void main()
     {
         TDynamicMatrix<double> M2(size);
         cout << "\nЗаполнение второй матрицы: " << endl;
-        cin >> M2;
+        fill(M2, size);
         cout << "\nВторая матрица: " << endl << M2 << endl;
         cout << "\nРезультат: " << endl << M1 + M2 << endl;
         break;
@@ -59,7 +91,7 @@ void main()
     {
         TDynamicMatrix<double> M2(size);
         cout << "\nЗаполнение второй матрицы (вычитаемой): " << endl;
-        cin >> M2;
+        fill(M2, size);
         cout << "\nВторая матрица: " << endl << M2 << endl;
         cout << "\nРезультат: " << endl << M1 - M2 << endl;
         break;
@@ -68,16 +100,40 @@ void main()
     {
         TDynamicMatrix<double> M2(size);
         cout << "\nЗаполнение второй матрицы: " << endl;
-        cin >> M2;
+        fill(M2, size);
         cout << "\nВторая матрица: " << endl << M2 << endl;
         cout << "\nРезультат: " << endl << M1 * M2 << endl;
         break;
     }
     case MULTIPLY_MATRIX_AND_VECTOR:
     {
+        int select_method, ind;
         TDynamicVector<double> V(size);
+
         cout << "\nЗаполнение вектора: " << endl;
-        cin >> V;
+        cout << "\nСпособ заполнения:\n" << endl;
+        cout << "1 - ручное заполнение" << endl;
+        cout << "2 - рандомное заполнение" << endl;
+        cout << "\nНомер: ";
+        cin >> select_method;
+
+        if (select_method == 1)  // Manual filling
+        {
+            cin >> V;
+        }
+        else if (select_method == 2)  // Random filling
+        {
+            for (ind = 0; ind < size; ind++)
+            {
+                V[ind] = rand() % 100;
+            }
+        }
+        else
+        {
+            cout << "ERROR: invalid number of filling method" << endl;
+            exit(1);
+        }
+        cout << "Вектор: " << V << endl;
         cout << "\nРезультат: " << endl << M1 * V << endl;
         break;
     }
