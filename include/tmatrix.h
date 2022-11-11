@@ -263,7 +263,7 @@ public:
   }
 
   // матрично-скалярные операции
-  TDynamicMatrix<T> operator*(const T& val)
+  TDynamicMatrix operator*(const T& val)
   {
       TDynamicMatrix tmp(sz);
       for (size_t i = 0; i < sz; i++)
