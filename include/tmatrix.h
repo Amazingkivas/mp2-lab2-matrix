@@ -137,7 +137,7 @@ public:
       }
       return tmp;
   }
-  TDynamicVector operator-(double val)
+  TDynamicVector operator-(T val)
   {
       TDynamicVector tmp(sz);
       for (size_t i = 0; i < sz; i++)
@@ -146,7 +146,7 @@ public:
       }
       return tmp;
   }
-  TDynamicVector operator*(double val)
+  TDynamicVector operator*(T val)
   {
       TDynamicVector tmp(sz);
       for (size_t i = 0; i < sz; i++)
@@ -263,7 +263,7 @@ public:
   }
 
   // матрично-скалярные операции
-  TDynamicMatrix operator*(const T& val)
+  TDynamicMatrix operator*(T val)
   {
       TDynamicMatrix tmp(sz);
       for (size_t i = 0; i < sz; i++)
